@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DurakServerLauncher
 {
@@ -20,6 +10,17 @@ namespace DurakServerLauncher
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static string DurakServerExePath
+        {
+            get
+            {
+                var config = Debugger.IsAttached ? "Debug" : "Release";
+                var solutionPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+                return string.Format(@"{0}\{1}\DurakServer.exe", solutionPath, config);
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,12 +29,12 @@ namespace DurakServerLauncher
         private void GenerateRandomSeed()
         {
             uint number = (uint)(new Random().Next(int.MinValue, int.MaxValue) + (uint)int.MaxValue);
-            textBoxDeckSeed.Text = "0x" + Convert.ToString(number, 16).PadLeft("ffffffff".Length, '0');
+            textBoxSeed.Text = "0x" + Convert.ToString(number, 16).PadLeft("ffffffff".Length, '0');
         }
 
         private bool CheckSeed()
         {
-            var seed = textBoxDeckSeed.Text.ToLower();
+            var seed = textBoxSeed.Text.ToLower();
             
             if (seed.Length != "0xffffffff".Length)
             {
@@ -54,12 +55,10 @@ namespace DurakServerLauncher
                 }
             }
 
-            textBoxDeckSeed.Text = seed; // Switch all to lower case
+            textBoxSeed.Text = seed; // Switch all to lower case
             
             return true;
         }
-
-        //
 
         private void windowLauncher_Loaded(object sender, RoutedEventArgs e)
         {
@@ -79,8 +78,21 @@ namespace DurakServerLauncher
             }
             else
             {
-                MessageBox.Show("Preparing to launch!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                // TODO!
+                try
+                {
+                    var variation = comboBoxVariation.Text.ToLower();
+                    var players = integerUpDownPlayers.Text;
+                    var seed = textBoxSeed.Text;
+                    var args = string.Format("{0} {1} {2}", variation, players, seed);
+
+                    Process.Start(DurakServerExePath, args);
+                    Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(string.Format("Unable to start process at: '{0}'", DurakServerExePath), 
+                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }

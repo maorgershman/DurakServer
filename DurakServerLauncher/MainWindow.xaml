@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:DurakServerLauncher"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="windowLauncher" x:Class="DurakServerLauncher.MainWindow"
         mc:Ignorable="d"
-        Title="Durak Server" Height="600" Width="450" WindowStartupLocation="CenterScreen" Icon="Resources/icon.png" Loaded="windowLauncher_Loaded">
+        Title="Durak Server" Height="600" Width="450" WindowStartupLocation="CenterScreen" Icon="Resources/icon.ico" Loaded="windowLauncher_Loaded">
     <Grid>
         <Label Content="Durak" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" FontFamily="/DurakServerLauncher;component/Resources/#Luckiest Guy" FontSize="105"/>
         <Label Content="By MgMaoR" Margin="0,140,0,0" VerticalAlignment="Top" FontFamily="/DurakServerLauncher;component/Resources/#Luckiest Guy" FontSize="58" Foreground="#FF7F7F7F" HorizontalAlignment="Center"/>
@@ -25,7 +25,7 @@
                 <TextBox x:Name="textBoxDeckSeed" TextAlignment="Center" MaxLength="10" TextWrapping="Wrap" Text="0xffffffff" VerticalAlignment="Top" UndoLimit="0" Margin="145,98,10,0"/>
             </Grid>
         </GroupBox>
-        <Image HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Source="Resources/icon.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Width="96" Height="96">
+        <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Source="Resources/icon.ico" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Width="96" Height="96">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

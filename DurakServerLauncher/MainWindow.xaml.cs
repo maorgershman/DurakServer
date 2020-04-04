@@ -24,5 +24,22 @@ namespace DurakServerLauncher
         {
             InitializeComponent();
         }
+
+        private void GenerateRandomSeed()
+        {
+            var random = new Random();
+            uint number = (uint)(random.Next(int.MinValue, int.MaxValue) + (uint)int.MaxValue);
+            textBoxDeckSeed.Text = "0x" + Convert.ToString(number, 16);
+        }
+
+        private void windowLauncher_Loaded(object sender, RoutedEventArgs e)
+        {
+            GenerateRandomSeed();
+        }
+
+        private void buttonGenerateNewSeed_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateRandomSeed();
+        }
     }
 }

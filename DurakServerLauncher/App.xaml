@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:DurakServerLauncher"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="CustomFont">
+            <Setter Property="TextElement.FontFamily" Value="/Resources/luckiest_guy.ttf"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

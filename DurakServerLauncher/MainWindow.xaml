@@ -1,12 +1,40 @@
-﻿<Window x:Class="DurakServerLauncher.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:DurakServerLauncher"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="windowLauncher" x:Class="DurakServerLauncher.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Durak Server" Height="600" Width="450" WindowStartupLocation="CenterScreen" Icon="Resources/icon.png" Loaded="windowLauncher_Loaded">
     <Grid>
-        
+        <Label Content="Durak" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" FontFamily="/DurakServerLauncher;component/Resources/#Luckiest Guy" FontSize="105"/>
+        <Label Content="By MgMaoR" Margin="0,140,0,0" VerticalAlignment="Top" FontFamily="/DurakServerLauncher;component/Resources/#Luckiest Guy" FontSize="58" Foreground="#FF7F7F7F" HorizontalAlignment="Center"/>
+        <GroupBox Header="Game Settings" Margin="0,250,0,0" VerticalAlignment="Top" FontSize="24" HorizontalAlignment="Center">
+            <Grid Margin="0">
+                <Label Content="Players:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,52,0,10"/>
+                <xctk:IntegerUpDown Value="2" Minimum="2" Maximum="6" Focusable="False" AllowTextInput="False" TextAlignment="Center" VerticalAlignment="Top" Margin="145,55,10,0" />
+                <Label Content="Variation:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                <ComboBox SelectedIndex="0" Margin="145,12,10,0" VerticalAlignment="Top">
+                    <System:String>Podkidnoy</System:String>
+                    <System:String>Perevodnoy</System:String>
+                </ComboBox>
+                <Label Content="Deck seed:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,94,0,0"/>
+                <Button x:Name="buttonGenerateNewSeed" Content="Generate New Seed" VerticalAlignment="Top" Margin="10,140,10,10" Click="buttonGenerateNewSeed_Click"/>
+                <TextBox x:Name="textBoxDeckSeed" TextAlignment="Center" MaxLength="10" TextWrapping="Wrap" Text="0xffffffff" VerticalAlignment="Top" UndoLimit="0" Margin="145,98,10,0"/>
+            </Grid>
+        </GroupBox>
+        <Image HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Source="Resources/icon.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Width="96" Height="96">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-45"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Button x:Name="buttonRun" Content="Run" VerticalAlignment="Top" Margin="0,488,0,0" FontSize="24" HorizontalAlignment="Center" Width="275"/>
     </Grid>
 </Window>

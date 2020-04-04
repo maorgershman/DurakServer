@@ -35,6 +35,6 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Button x:Name="buttonRun" Content="Run" VerticalAlignment="Top" Margin="0,488,0,0" FontSize="24" HorizontalAlignment="Center" Width="275"/>
+        <Button x:Name="buttonRun" Content="Run" VerticalAlignment="Top" Margin="0,488,0,0" FontSize="24" HorizontalAlignment="Center" Width="275" Click="buttonRun_Click"/>
     </Grid>
 </Window>

@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:DurakServerLauncher"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="windowLauncher" x:Class="DurakServerLauncher.MainWindow"
         mc:Ignorable="d"
-        Title="Durak Server" Height="600" Width="450" WindowStartupLocation="CenterScreen" Icon="Resources/icon.ico" Loaded="windowLauncher_Loaded">
+        Title="Durak Server Launcher" Height="600" Width="450" WindowStartupLocation="CenterScreen" Icon="Resources/icon.ico" Loaded="windowLauncher_Loaded">
     <Grid>
         <Label Content="Durak" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" FontFamily="/DurakServerLauncher;component/Resources/#Luckiest Guy" FontSize="105"/>
         <Label Content="By MgMaoR" Margin="0,140,0,0" VerticalAlignment="Top" FontFamily="/DurakServerLauncher;component/Resources/#Luckiest Guy" FontSize="58" Foreground="#FF7F7F7F" HorizontalAlignment="Center"/>

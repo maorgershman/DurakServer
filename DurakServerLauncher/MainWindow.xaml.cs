@@ -14,10 +14,9 @@ namespace DurakServerLauncher
         {
             get
             {
-                var config = Debugger.IsAttached ? "Debug" : "Release";
-                var solutionPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+                var solutionPath = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
 
-                return string.Format(@"{0}\{1}\DurakServer.exe", solutionPath, config);
+                return string.Format(@"{0}\Binaries\DurakServer.exe", solutionPath);
             }
         }
 

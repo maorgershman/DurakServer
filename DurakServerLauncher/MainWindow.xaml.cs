@@ -79,7 +79,7 @@ namespace DurakServerLauncher
             {
                 try
                 {
-                    var variation = comboBoxVariation.Text.ToLower();
+                    var variation = comboBoxVariation.Text;
                     var players = integerUpDownPlayers.Text;
                     var seed = textBoxSeed.Text;
                     var args = string.Format("{0} {1} {2}", variation, players, seed);

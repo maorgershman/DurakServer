@@ -1,15 +1,14 @@
 #pragma once
 
-#include <Windows.h>
+#include <includes.hpp>
 
 namespace UI
 {
     struct Window
     {
-        static HWND hWnd;
-
-        static void initialize(HINSTANCE hInstance);
-        static void run();
+        static void create(HINSTANCE hInstance);
         static void loop();
+
+        static HWND get_hWnd();
     };
 } // namespace UI

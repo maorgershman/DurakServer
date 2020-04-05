@@ -19,13 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\UI\Graphics.cpp" />
-    <ClCompile Include="Source\UI\Main.cpp" />
-    <ClCompile Include="Source\UI\Window.cpp" />
+    <ClCompile Include="Source\durak.cpp" />
+    <ClCompile Include="Source\UI\graphics.cpp" />
+    <ClCompile Include="Source\UI\main.cpp" />
+    <ClCompile Include="Source\UI\window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\UI\Window.hpp" />
-    <ClInclude Include="Resources\resource.h" />
+    <ClInclude Include="Include\durak.hpp" />
+    <ClInclude Include="Include\game_settings.hpp" />
+    <ClInclude Include="Include\includes.hpp" />
+    <ClInclude Include="Include\UI\graphics.hpp" />
+    <ClInclude Include="Include\UI\window.hpp" />
+    <ClInclude Include="Resources\resource.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\resource.rc" />
@@ -123,6 +128,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableSpecificWarnings>28251</DisableSpecificWarnings>
+      <ForcedIncludeFiles>Windows.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -136,6 +143,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableSpecificWarnings>28251</DisableSpecificWarnings>
+      <ForcedIncludeFiles>Windows.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -151,6 +160,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableSpecificWarnings>28251</DisableSpecificWarnings>
+      <ForcedIncludeFiles>Windows.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -168,6 +179,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableSpecificWarnings>28251</DisableSpecificWarnings>
+      <ForcedIncludeFiles>Windows.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

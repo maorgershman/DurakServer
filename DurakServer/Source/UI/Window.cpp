@@ -1,18 +1,26 @@
-#include <UI/Window.hpp>
-#include <resource.h>
+#include <UI/window.hpp>
+#include <resource.hpp>
 
 namespace UI
 {
     ////////////////////////////
     // Static constant variables
 
-    static constexpr auto strWindowClassName = TEXT("DurakServer");
-    static constexpr auto strWindowTitle = TEXT("Durak Server");
+    static constexpr auto strWndClassName = TEXT("DurakServer");
+    static constexpr auto strWndTitle = TEXT("Durak Server");
+    static constexpr auto strConsoleTitle = TEXT("Durak Server - Console");
+    static constexpr auto nWndStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_VISIBLE;
+    static constexpr int nCliWidth = 1280;
+    static constexpr int nCliHeight = 720;
+    static constexpr int nWndWidth = nCliWidth + 16;
+    static constexpr int nWndHeight = nCliHeight + 39;
 
     ////////////////////////////
     // Static variables
 
     static HINSTANCE hInstance;
+    static HWND hWnd;
+    static int nWndX, nWndY;
 
     ////////////////////////////
     // Static functions prototypes
@@ -20,31 +28,40 @@ namespace UI
     static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
     ////////////////////////////
-    // Link external variables
-
-    HWND Window::hWnd;
-
-    ////////////////////////////
     // External functions definitions
 
-    void Window::initialize(HINSTANCE hInstance_Local)
+    void Window::create(HINSTANCE hInstance_Local)
     {
         hInstance = hInstance_Local;
 
+        // Register the window
         WNDCLASS wc{};
-        wc.lpszClassName = strWindowClassName;
         wc.hInstance = hInstance;
         wc.hCursor = LoadCursor(NULL, IDC_ARROW);
         wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON));
+        wc.lpszClassName = strWndClassName;
         wc.lpfnWndProc = WndProc;
+        wc.hbrBackground = static_cast<HBRUSH>(GetStockObject(WHITE_BRUSH));
         RegisterClass(&wc);
-    }
+        
+        // Attach a console
+        AllocConsole();
+        AttachConsole(GetCurrentProcessId());
+        SetConsoleTitle(strConsoleTitle);
 
-    void Window::run()
-    {
-        hWnd = CreateWindow(strWindowClassName, strWindowTitle, 
-            WS_VISIBLE | WS_OVERLAPPEDWINDOW, 
-            100, 100, 800, 600, NULL, NULL, hInstance, NULL);
+        // Set the standard input and output streams to the console
+        FILE *pOutStream, *pInStream;
+        freopen_s(&pInStream, "CON", "r", stdin);
+        freopen_s(&pOutStream, "CON", "w", stdout);
+
+        // Calculate the window X & Y so that it will be centered
+        RECT screenRect{};
+        GetClientRect(GetDesktopWindow(), &screenRect);
+        nWndX = (screenRect.right - nWndWidth) / 2;
+        nWndY = (screenRect.bottom - nWndHeight) / 2;
+
+        // Create the window
+        hWnd = CreateWindow(strWndClassName, strWndTitle, nWndStyle, nWndX, nWndY, nWndWidth, nWndHeight, NULL, NULL, hInstance, NULL);
     }
 
     void Window::loop()
@@ -55,6 +72,11 @@ namespace UI
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+    }
+
+    HWND Window::get_hWnd()
+    {
+        return hWnd;
     }
 
     ////////////////////////////

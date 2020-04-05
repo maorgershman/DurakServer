@@ -1,6 +1,6 @@
 #pragma once
 
-#include <resource.h>
+#include <resource.hpp>
 #include <winnt.h>
 
 IDI_ICON ICON TEXT("icon.ico")

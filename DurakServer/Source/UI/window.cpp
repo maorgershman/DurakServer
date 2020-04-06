@@ -1,5 +1,8 @@
 #include <UI/window.hpp>
 #include <resource.hpp>
+#include <includes.hpp>
+
+#include <cstdio>
 
 namespace UI
 {
@@ -26,6 +29,7 @@ namespace UI
     // Static functions prototypes
 
     static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+    static BOOL WINAPI HandlerRoutine(DWORD dwCtrlType);
 
     ////////////////////////////
     // External functions definitions
@@ -48,12 +52,13 @@ namespace UI
         AllocConsole();
         AttachConsole(GetCurrentProcessId());
         SetConsoleTitle(strConsoleTitle);
+        SetConsoleCtrlHandler(HandlerRoutine, TRUE);
 
         // Set the standard input and output streams to the console
         FILE *pOutStream, *pInStream;
         freopen_s(&pInStream, "CON", "r", stdin);
         freopen_s(&pOutStream, "CON", "w", stdout);
-
+        
         // Calculate the window X & Y so that it will be centered
         RECT screenRect{};
         GetClientRect(GetDesktopWindow(), &screenRect);
@@ -86,11 +91,18 @@ namespace UI
     {
         switch (msg)
         {
-            case WM_CLOSE:
-            {
-                PostQuitMessage(0);
-            } break;
+        case WM_CLOSE:
+            UI::on_window_close();
         }
         return DefWindowProc(hWnd, msg, wParam, lParam);
+    }
+
+    BOOL WINAPI HandlerRoutine(DWORD dwCtrlType)
+    {
+        if (dwCtrlType == CTRL_CLOSE_EVENT)
+        {
+            UI::on_console_close();
+        }
+        return FALSE;
     }
 } // namespace UI

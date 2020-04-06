@@ -1,5 +1,7 @@
 #pragma once
 
+#include <UI/UI.hpp>
+
 namespace UI
 {
     struct Graphics

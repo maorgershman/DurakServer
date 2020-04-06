@@ -1,25 +1,25 @@
 #pragma once
 
-#include <Windows.h>
 #include <iostream>
-#include <cstdio>
-#include <cstdint>
 #include <string>
 #include <sstream>
-#include <iomanip>
 
-#pragma warning(disable : 28251) // Inconsistent annotation on wWinMain/WinMain
+#include <cstdint>
 
 #ifdef UNICODE
-#define Main wWinMain
-#define cout std::wcout
-#define string std::wstring
-#define stringstream std::wstringstream
+#define T(x) L##x
+#define tmain wWinMain
+#define tcout std::wcout
+#define tstring std::wstring
+#define tstringstream std::wstringstream
+#define to_tstring std::to_wstring
 #else
-#define Main WinMain
-#define cout std::cout
-#define string std::string
-#define stringstream std::stringstream
+#define T(x) x
+#define tmain WinMain
+#define tcout std::cout
+#define tstring std::string
+#define tstringstream std::stringstream
+#define to_tstring std::to_string
 #endif
 
 using std::endl;

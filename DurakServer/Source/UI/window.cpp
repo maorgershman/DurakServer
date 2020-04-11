@@ -55,9 +55,11 @@ namespace UI
         SetConsoleCtrlHandler(HandlerRoutine, TRUE);
 
         // Set the standard input and output streams to the console
-        FILE *pOutStream, *pInStream;
-        freopen_s(&pInStream, "CON", "r", stdin);
+        FILE* pOutStream;
         freopen_s(&pOutStream, "CON", "w", stdout);
+
+        //FILE* pInStream;
+        //freopen_s(&pInStream, "CON", "r", stdin);
         
         // Calculate the window X & Y so that it will be centered
         RECT screenRect{};

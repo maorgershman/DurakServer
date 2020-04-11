@@ -10,6 +10,8 @@ namespace Server
     static constexpr int maxClients = 6;
     static constexpr int port = 8888;
 
+    static constexpr auto magicEntryPacket = 0xdeadbeefcafebabe;
+
     ////////////////////////////
     // Static variables
 
@@ -80,7 +82,37 @@ namespace Server
     {
         tcout << T("Handshake from ") << clientSocket.address << T(":") << clientSocket.port << endl;
 
-        // TODO: Actually accept a player. 
-        // Durak class should handle the players, the server is only an interface.
+        constexpr long timeoutMillis = 500; // half a second to send the first packet
+        clientSocket.client_set_timeout(timeoutMillis);
+
+        // Copy the magic entry packet to an array
+        char magicEntryPacketArray[sizeof(magicEntryPacket)]; 
+        memcpy(magicEntryPacketArray, &magicEntryPacket, sizeof(magicEntryPacket));
+
+        bool success = false;
+
+        char buffer[sizeof(magicEntryPacketArray)];
+        // Make sure that the socket has read the currect amount of bytes
+        if (clientSocket.client_recv(buffer, sizeof(buffer)) == sizeof(buffer))
+        {
+            if (!memcmp(buffer, magicEntryPacketArray, sizeof(buffer)))
+            {
+                success = true;
+            }
+        }
+
+        if (!success)
+        {
+            tcout << clientSocket.address << T(":") << clientSocket.port <<
+                T(" has failed to send the magic entry packet in ") <<
+                timeoutMillis << T("ms!") << endl;
+
+            clientSocket.client_close();
+        }
+        else
+        {
+            // TODO: Actually accept a player. 
+            // Durak class should handle the players, the server is only an interface.
+        }
     }
 } // namespace Server

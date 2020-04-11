@@ -40,7 +40,7 @@ namespace UI
     {
         Durak::close();
 
-        const int seconds = 3;
+        constexpr int seconds = 1;
         for (int i = seconds; i > 0; i--)
         {
             tcout << T("Terminating in ") << i << T(" seconds...") << endl;

@@ -1,5 +1,3 @@
-
-// Must include the server before the UI, because of WinSock stuff
 #include <UI/UI.hpp>
 #include <Durak/durak.hpp>
 

@@ -1,8 +1,11 @@
-#include <Server/server_socket.hpp>
+#include <Network/server_socket.hpp>
+#include <Network/client.hpp>
 
 #include <thread>
+#include <vector>
+#include <algorithm>
 
-namespace Server
+namespace Network
 {
     ////////////////////////////
     // Static constant variables
@@ -10,19 +13,21 @@ namespace Server
     static constexpr int maxClients = 6;
     static constexpr int port = 8888;
 
-    static constexpr auto magicEntryPacket = 0xdeadbeefcafebabe;
+    static constexpr auto magicEntryPacket = 0xdeadbeef/*cafebabe*/;
 
     ////////////////////////////
     // Static variables
 
     static bool isOpen = false;
     static ServerSocket serverSocket(port);
+    static std::vector<Client*> clients;
 
     ////////////////////////////
     // Static functions prototypes
 
     static void host();
     static void create_client(const ClientSocket& clientSocket);
+    static void remove_client(const Client* pClient);
 
     ////////////////////////////
     // External functions definitions
@@ -41,8 +46,12 @@ namespace Server
     void Server::close()
     {
         // Durak class has the responsibility to disconnect the connected players.
-        // The server should only handle technical sockety stuff.
+        // This responsibility doesn't include closing the sockets tho.
         isOpen = false;
+        for (auto pClient : clients)
+        {
+            remove_client(pClient);
+        }
         serverSocket.server_close();
         tcout << T("Server is dead!") << endl;
     }
@@ -82,7 +91,7 @@ namespace Server
     {
         tcout << T("Handshake from ") << clientSocket.address << T(":") << clientSocket.port << endl;
 
-        constexpr long timeoutMillis = 500; // half a second to send the first packet
+        constexpr long timeoutMillis = 1500; // half a second to send the first packet
         clientSocket.client_set_timeout(timeoutMillis);
 
         // Copy the magic entry packet to an array
@@ -102,7 +111,7 @@ namespace Server
         }
 
         if (!success)
-        {
+        {  
             tcout << clientSocket.address << T(":") << clientSocket.port <<
                 T(" has failed to send the magic entry packet in ") <<
                 timeoutMillis << T("ms!") << endl;
@@ -111,8 +120,34 @@ namespace Server
         }
         else
         {
-            // TODO: Actually accept a player. 
-            // Durak class should handle the players, the server is only an interface.
+            // Create the client, run it, and then close it
+            // The client will loop on the same thread
+            auto pClient = new Client(clientSocket);
+            clients.push_back(pClient);
+
+            pClient->run();
+            
+            // Super important:
+            // TODO: Notify the game that the player has disconnected before removing his client!
+            
+            // Important!
+            // When the server is closed, first this flag is set to false,
+            // and only then removes the clients
+            // Because the threads are racing, this flag must be checked
+            if (isOpen)
+            {
+                remove_client(pClient);
+            }
         }
+
+        return;
     }
-} // namespace Server
+
+    void remove_client(const Client* pClient)
+    {
+        auto& v = clients;
+
+        v.erase(std::remove(v.begin(), v.end(), pClient));
+        delete pClient;
+    }
+} // namespace Network

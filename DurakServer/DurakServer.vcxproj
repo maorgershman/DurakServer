@@ -21,9 +21,10 @@
   <ItemGroup>
     <ClCompile Include="Source\Durak\durak.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Server\client_socket.cpp" />
-    <ClCompile Include="Source\Server\server.cpp" />
-    <ClCompile Include="Source\Server\server_socket.cpp" />
+    <ClCompile Include="Source\Network\client.cpp" />
+    <ClCompile Include="Source\Network\client_socket.cpp" />
+    <ClCompile Include="Source\Network\server.cpp" />
+    <ClCompile Include="Source\Network\server_socket.cpp" />
     <ClCompile Include="Source\UI\graphics.cpp" />
     <ClCompile Include="Source\UI\UI.cpp" />
     <ClCompile Include="Source\UI\window.cpp" />
@@ -31,9 +32,10 @@
   <ItemGroup>
     <ClInclude Include="Include\Durak\durak.hpp" />
     <ClInclude Include="Include\includes.hpp" />
-    <ClInclude Include="Include\Server\client_socket.hpp" />
-    <ClInclude Include="Include\Server\server.hpp" />
-    <ClInclude Include="Include\Server\server_socket.hpp" />
+    <ClInclude Include="Include\Network\client.hpp" />
+    <ClInclude Include="Include\Network\client_socket.hpp" />
+    <ClInclude Include="Include\Network\server.hpp" />
+    <ClInclude Include="Include\Network\server_socket.hpp" />
     <ClInclude Include="Include\UI\graphics.hpp" />
     <ClInclude Include="Include\UI\UI.hpp" />
     <ClInclude Include="Include\UI\window.hpp" />
@@ -56,7 +58,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -69,7 +71,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>

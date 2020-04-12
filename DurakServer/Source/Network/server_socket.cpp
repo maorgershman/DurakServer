@@ -1,8 +1,7 @@
-#include <Server/server_socket.hpp>
+#include <Network/server_socket.hpp>
 
-namespace Server
+namespace Network
 {
-
     ////////////////////////////
     // Static variables
 
@@ -56,7 +55,7 @@ namespace Server
 
     void ServerSocket::server_set_timeout(long timeoutMillis) const
     {
-        if (setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO | SO_SNDTIMEO, reinterpret_cast<const char*>(&timeoutMillis), sizeof(timeval)) == -1)
+        if (setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<const char*>(&timeoutMillis), sizeof(timeval)) == -1)
         {
             throw std::runtime_error("Unable to set socket timeout!");
         }
@@ -86,5 +85,4 @@ namespace Server
             WSACleanup();
         }
     }
-
 } // namespace Server

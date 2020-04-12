@@ -1,4 +1,4 @@
-#include <Server/server.hpp> // Changing the order will result in linker errors, thanks Windows!
+#include <Network/server.hpp> // Changing the order will result in linker errors, thanks Windows!
 #include <Durak/durak.hpp>
 
 namespace Durak
@@ -36,13 +36,13 @@ namespace Durak
             }
             else
             {
-                tcout << T("Invalid variation!") << endl;
+                throw std::runtime_error("Invalid variation!");
                 return;
             }
 
             // Player count
             {
-                int playerCount = std::stoi(strPlayerCount);
+                int playerCount = std::stoi(strPlayerCount); 
                 if (playerCount >= 2 && playerCount <= 6)
                 {
                     gameSettings.playerCount = playerCount;
@@ -50,7 +50,7 @@ namespace Durak
                 }
                 else
                 {
-                    tcout << T("Invalid player count: ") << playerCount << endl;
+                    throw std::runtime_error("Invalid player count: " + std::to_string(playerCount));
                     return;
                 }
             }
@@ -71,13 +71,13 @@ namespace Durak
     void run()
     {
         // TODO: Start a game thread
-        Server::run();
+        Network::Server::run();
     }
 
     void close()
     {
         // TODO: Disconnect the connected players and free dynamic memory
-        Server::close();
+        Network::Server::close();
     }
 
     const GameSettings& get_game_settings()

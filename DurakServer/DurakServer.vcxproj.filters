@@ -19,17 +19,17 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{72929125-158e-432d-ab93-f4d94557bc34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Server">
-      <UniqueIdentifier>{f5619c2a-2c31-4972-b678-0f616ffc29e0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Durak">
       <UniqueIdentifier>{794faad3-e5a7-458f-9ecf-7e4d2ce6c27b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Server">
-      <UniqueIdentifier>{0245497c-2b41-481d-87cc-f2bed7544ac1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Durak">
       <UniqueIdentifier>{51b70ba0-027a-4469-aa82-b92558815d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network">
+      <UniqueIdentifier>{f5619c2a-2c31-4972-b678-0f616ffc29e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Network">
+      <UniqueIdentifier>{51b92e67-fe5e-4744-b431-e1e1845a657d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,20 +42,23 @@
     <ClCompile Include="Source\Durak\durak.cpp">
       <Filter>Source Files\Durak</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Server\client_socket.cpp">
-      <Filter>Source Files\Server</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Server\server.cpp">
-      <Filter>Source Files\Server</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Server\server_socket.cpp">
-      <Filter>Source Files\Server</Filter>
-    </ClCompile>
     <ClCompile Include="Source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\UI\UI.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\client.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\client_socket.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\server.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\server_socket.cpp">
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,17 +77,20 @@
     <ClInclude Include="Include\Durak\durak.hpp">
       <Filter>Header Files\Durak</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Server\client_socket.hpp">
-      <Filter>Header Files\Server</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Server\server.hpp">
-      <Filter>Header Files\Server</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Server\server_socket.hpp">
-      <Filter>Header Files\Server</Filter>
-    </ClInclude>
     <ClInclude Include="Include\UI\UI.hpp">
       <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Network\client.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Network\client_socket.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Network\server.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Network\server_socket.hpp">
+      <Filter>Header Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

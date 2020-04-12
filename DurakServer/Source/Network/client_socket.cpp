@@ -1,6 +1,6 @@
-#include <Server/client_socket.hpp>
+#include <Network/client_socket.hpp>
 
-namespace Server
+namespace Network
 {
     ////////////////////////////
     // Static variables

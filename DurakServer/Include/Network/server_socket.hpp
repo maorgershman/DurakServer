@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Server/client_socket.hpp>
+#include <Network/client_socket.hpp>
 
-namespace Server
+namespace Network
 {
     struct ServerSocket
     {
@@ -18,4 +18,4 @@ namespace Server
         ClientSocket server_accept() const;
         void server_close() const;
     };
-} // namespace Server
+} // namespace Network

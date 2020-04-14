@@ -20,22 +20,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Durak\durak.cpp" />
+    <ClCompile Include="Source\Durak\player.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Network\client.cpp" />
+    <ClCompile Include="Source\Network\player_client.cpp" />
     <ClCompile Include="Source\Network\client_socket.cpp" />
     <ClCompile Include="Source\Network\server.cpp" />
     <ClCompile Include="Source\Network\server_socket.cpp" />
+    <ClCompile Include="Source\Network\prime_client.cpp" />
     <ClCompile Include="Source\UI\graphics.cpp" />
     <ClCompile Include="Source\UI\UI.cpp" />
     <ClCompile Include="Source\UI\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Durak\durak.hpp" />
+    <ClInclude Include="Include\Durak\player.hpp" />
     <ClInclude Include="Include\includes.hpp" />
-    <ClInclude Include="Include\Network\client.hpp" />
+    <ClInclude Include="Include\Network\player_client.hpp" />
     <ClInclude Include="Include\Network\client_socket.hpp" />
     <ClInclude Include="Include\Network\server.hpp" />
     <ClInclude Include="Include\Network\server_socket.hpp" />
+    <ClInclude Include="Include\Network\prime_client.hpp" />
     <ClInclude Include="Include\UI\graphics.hpp" />
     <ClInclude Include="Include\UI\UI.hpp" />
     <ClInclude Include="Include\UI\window.hpp" />

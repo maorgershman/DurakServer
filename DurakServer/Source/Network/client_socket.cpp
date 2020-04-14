@@ -56,6 +56,11 @@ namespace Network
         return socketAddress;
     }
 
+    const tstring ClientSocket::to_string() const
+    {
+        return address + T(":") + to_tstring(port);
+    }
+
     ////////////////////////////
     // Static functions definitions
 

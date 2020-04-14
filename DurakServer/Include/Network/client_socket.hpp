@@ -18,5 +18,7 @@ namespace Network
 
         SocketFd get_socket_fd() const;
         const SocketAddress& get_socket_address() const;
+
+        const tstring to_string() const;
     };
 } // namespace Network

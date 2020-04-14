@@ -1,5 +1,10 @@
 #include <Network/server.hpp> // Changing the order will result in linker errors, thanks Windows!
+#include <Durak/player.hpp>
+
 #include <Durak/durak.hpp>
+
+#include <vector>
+#include <algorithm>
 
 namespace Durak
 {
@@ -7,6 +12,7 @@ namespace Durak
     // Static variables
 
     static GameSettings gameSettings;
+    static std::vector<Player*> players;
 
     ////////////////////////////
     // External functions definitions

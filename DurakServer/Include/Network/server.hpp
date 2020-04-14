@@ -11,6 +11,5 @@ namespace Network
     {
         static void run();
         static void close();
-        static bool is_open();
     };
 }; // namespace Network

@@ -7,7 +7,7 @@ namespace Network
 {
     struct ClientSocket
     {
-        const tstring address;
+        const std::string address;
         const int port;
 
         ClientSocket(SocketFd socketFd, SocketAddress socketAddress);
@@ -19,6 +19,6 @@ namespace Network
         SocketFd get_socket_fd() const;
         const SocketAddress& get_socket_address() const;
 
-        const tstring to_string() const;
+        const std::string to_string() const;
     };
 } // namespace Network

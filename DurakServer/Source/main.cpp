@@ -1,11 +1,19 @@
 #include <UI/UI.hpp>
 #include <Durak/durak.hpp>
 
-int WINAPI tmain(HINSTANCE hInstance, HINSTANCE, PTSTR pCmdLine, int)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR pCmdLine, int)
 {
-    UI::create(hInstance); // Create the UI
-    Durak::load_settings(pCmdLine); // Load the game settings
-    Durak::run();
-    UI::run();
+    try
+    {
+        UI::create(hInstance); // Create the UI
+        Durak::load_settings(pCmdLine); // Load the game settings
+        Durak::run();
+        UI::run();
+    }
+    catch (const std::runtime_error& err)
+    {
+        std::cout << "Error: " << err.what() << std::endl;
+        UI::terminate(10);
+    }
     return 0;
 }

@@ -5,17 +5,19 @@
 namespace UI
 {
     ////////////////////////////
-    // Static functions prototypes
-
-    static void terminate();
-
-    ////////////////////////////
     // External functions definitions
 
     void create(HINSTANCE hInstance)
     {
-        Window::create(hInstance);
-        Graphics::initialize();
+        try
+        {
+            Window::create(hInstance);
+            Graphics::initialize();
+        }
+        catch (const std::runtime_error& err)
+        {
+            throw err;
+        }
     }
 
     void run()
@@ -25,25 +27,21 @@ namespace UI
 
     void on_console_close()
     {
-        terminate();
+        terminate(1);
     }
 
     void on_window_close()
     {
-        terminate();
+        terminate(1);
     }
 
-    ////////////////////////////
-    // Static functions definitions
-
-    void terminate()
+    void terminate(int seconds)
     {
         Durak::close();
 
-        constexpr int seconds = 1;
         for (int i = seconds; i > 0; i--)
         {
-            tcout << T("Terminating in ") << i << T(" seconds...") << endl;
+            std::cout << "Terminating in " << i << " seconds..." << std::endl;
             Sleep(1000);
         }
 

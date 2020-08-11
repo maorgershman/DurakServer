@@ -6,7 +6,7 @@ namespace Network
     PrimeClient::PrimeClient(ClientSocket&& socket)
         : socket(socket)
     {
-        tcout << T("Handshake from ") << to_string() << endl;
+        std::cout << "Handshake from " << to_string() << std::endl;
 
         // Hard coded values that should be sent in the first packet to indicate the client's intent
         constexpr auto magicCode_Player = 0xace0beef;
@@ -37,7 +37,7 @@ namespace Network
             }
             else
             { // Invalid response or timed out
-                tcout << to_string() << T(" has failed to identify in ") << packetTimeoutMillis << T("ms!") << endl;
+                std::cout << to_string() << " has failed to identify in " << packetTimeoutMillis << "ms!" << std::endl;
             }
         }
     }
@@ -47,7 +47,7 @@ namespace Network
         socket.client_close();
     }
 
-    const tstring PrimeClient::to_string() const
+    const std::string PrimeClient::to_string() const
     {
         return socket.to_string();
     }

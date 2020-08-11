@@ -30,7 +30,7 @@ namespace Network
         std::thread thread(
             [&]()
             {
-                tcout << T("Server is running on port ") << port << T("!") << endl;
+                std::cout << "Server is running on port " << port << "!" << std::endl;
                 isOpen = true;
 
                 while (isOpen)
@@ -52,7 +52,7 @@ namespace Network
                     {
                         if (isOpen)
                         { // When closing the socket, an exception will be thrown (naturally). Ignore it
-                            std::cout << ex.what() << endl;
+                            std::cout << ex.what() << std::endl;
                         }
                     }
                 }
@@ -64,6 +64,6 @@ namespace Network
     {
         isOpen = false;
         serverSocket.server_close();
-        tcout << T("Server is dead!") << endl;
+        std::cout << "Server is dead!" << std::endl;
     }
 } // namespace Network

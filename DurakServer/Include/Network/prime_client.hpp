@@ -11,6 +11,6 @@ namespace Network
         PrimeClient(ClientSocket&& socket);
         ~PrimeClient();
 
-        const tstring to_string() const;
+        const std::string to_string() const;
     };
 } // namespace Network

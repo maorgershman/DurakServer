@@ -11,7 +11,7 @@ namespace Network
     ////////////////////////////
     // Static functions prototypes
 
-    static tstring load_address(const SocketAddress& socketAddress);
+    static std::string load_address(const SocketAddress& socketAddress);
     static int load_port(const SocketAddress& socketAddress);
 
     ////////////////////////////
@@ -56,18 +56,18 @@ namespace Network
         return socketAddress;
     }
 
-    const tstring ClientSocket::to_string() const
+    const std::string ClientSocket::to_string() const
     {
-        return address + T(":") + to_tstring(port);
+        return address + ":" + std::to_string(port);
     }
 
     ////////////////////////////
     // Static functions definitions
 
-    tstring load_address(const SocketAddress& socketAddress)
+    std::string load_address(const SocketAddress& socketAddress)
     {
-        TCHAR buffer[4 * 3 + 3 + 1]; // XXX.XXX.XXX.XXX
-        InetNtop(AF_INET, &socketAddress.sin_addr, buffer, sizeof(buffer) / sizeof(TCHAR));
+        char buffer[4 * 3 + 3 + 1]; // XXX.XXX.XXX.XXX
+        inet_ntop(AF_INET, &socketAddress.sin_addr, buffer, sizeof(buffer) / sizeof(char));
         return buffer;
     }
 

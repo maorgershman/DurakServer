@@ -13,10 +13,8 @@ namespace UI
     static constexpr auto strWndTitle = TEXT("Durak Server");
     static constexpr auto strConsoleTitle = TEXT("Durak Server - Console");
     static constexpr auto nWndStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_VISIBLE;
-    static constexpr int nCliWidth = 1280;
-    static constexpr int nCliHeight = 720;
-    static constexpr int nWndWidth = nCliWidth + 16;
-    static constexpr int nWndHeight = nCliHeight + 39;
+    static constexpr int nWndWidth = Window::width + 16;
+    static constexpr int nWndHeight = Window::height + 39;
 
     ////////////////////////////
     // Static variables

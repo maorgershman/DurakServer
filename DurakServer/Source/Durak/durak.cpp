@@ -2,9 +2,11 @@
 #include <Durak/player.hpp>
 
 #include <Durak/durak.hpp>
+#include <UI/graphics.hpp>
 
 #include <vector>
 #include <algorithm>
+#include <thread>
 
 namespace Durak
 {
@@ -14,31 +16,40 @@ namespace Durak
     static GameSettings gameSettings;
     static std::vector<Player*> players;
 
+    static bool isGameLoopRunning;
+    static GameState gameState;
+
+    ////////////////////////////
+    // Static functions prototypes
+
+    static void set_state(GameState state);
+    static void game_loop();
+
     ////////////////////////////
     // External functions definitions
     
-    void load_settings(tstring&& strCmdLine)
+    void load_settings(std::string&& strCmdLine)
     {
         // Parse the command line args
         {
-            tstring strVariation, strPlayerCount, strSeed;
+            std::string strVariation, strPlayerCount, strSeed;
             {
-                tstringstream ss(strCmdLine);
+                std::stringstream ss(strCmdLine);
                 ss >> strVariation;
                 ss >> strPlayerCount;
                 ss >> strSeed;
             }
 
             // Variation
-            if (strVariation == T("Podkidnoy"))
+            if (strVariation == "Podkidnoy")
             {
                 gameSettings.variation = GameSettings::Variation::Podkidnoy;
-                tcout << T("Variation = Podkidnoy") << endl;
+                std::cout << "Variation = Podkidnoy" << std::endl;
             }
-            else if (strVariation == T("Perevodnoy"))
+            else if (strVariation == "Perevodnoy")
             {
                 gameSettings.variation = GameSettings::Variation::Perevodnoy;
-                tcout << T("Variation = Perevodnoy") << endl;
+                std::cout << "Variation = Perevodnoy" << std::endl;
             }
             else
             {
@@ -52,7 +63,7 @@ namespace Durak
                 if (playerCount >= 2 && playerCount <= 6)
                 {
                     gameSettings.playerCount = playerCount;
-                    tcout << T("Player count = ") << playerCount << endl;
+                    std::cout << "Player count = " << playerCount << std::endl;
                 }
                 else
                 {
@@ -69,19 +80,22 @@ namespace Durak
                 uint32_t seed = std::stoul(strSeed, nullptr, 16); // base 16
 
                 gameSettings.seed = seed;
-                tcout << T("Seed = 0x") << std::hex << seed << std::dec << endl;
+                std::cout << "Seed = 0x" << std::hex << seed << std::dec << std::endl;
             }
         }
     }
 
     void run()
     {
-        // TODO: Start a game thread
         Network::Server::run();
+
+        std::thread gameThread(game_loop);
+        gameThread.detach();
     }
 
     void close()
     {
+        isGameLoopRunning = false;
         // TODO: Disconnect the connected players and free dynamic memory
         Network::Server::close();
     }
@@ -89,5 +103,25 @@ namespace Durak
     const GameSettings& get_game_settings()
     {
         return gameSettings;
+    }
+
+    ///////////////////////////////
+
+    void set_state(GameState state)
+    {
+        gameState = state;
+        UI::Graphics::set_state(state);
+    }
+
+    void game_loop()
+    {
+        isGameLoopRunning = true;
+        set_state(GameState::WaitingForPlayers);
+
+        while (isGameLoopRunning)
+        {
+            UI::Graphics::render();
+            Sleep(5); // 200 fps
+        }
     }
 } // namespace Durak

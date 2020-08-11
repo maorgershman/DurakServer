@@ -16,7 +16,13 @@ namespace Durak
         uint32_t  seed;
     };
 
-    void load_settings(tstring&& strCmdLine);
+    enum class GameState : uint8_t
+    {
+        Undetermined = 0xff,
+        WaitingForPlayers = 0x00
+    };
+
+    void load_settings(std::string&& strCmdLine);
     void run();
     void close();
 

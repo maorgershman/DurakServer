@@ -5,7 +5,7 @@ namespace Network
     PlayerClient::PlayerClient(const PrimeClient& client)
         : client(client)
     {
-        tcout << T("Created a new player client for ") << client.to_string() << endl;
+        std::cout << "Created a new player client for " << client.to_string() << std::endl;
 
         // TODO: Wait for information such as nickname (ofc limited time, consider multiple attempts)
         // If received successfully, create a player instance via the Durak interface
@@ -19,7 +19,7 @@ namespace Network
 
     PlayerClient::~PlayerClient()
     {
-        tcout << T("Destroyed the player client for ") << client.to_string() << endl;
+        std::cout << "Destroyed the player client for " << client.to_string() << std::endl;
 
         // TODO: If a player was created successfully, disconnect him
     }
